@@ -33,10 +33,10 @@ var wind = response.wind.speed;
   console.log()
 
 // creating dynamic HTML content to display city, temp, humidity, wind and UV index data
-var cityNameEl = $("<h2 class='card-title text-center'>").text(cityName);
+var cityNameEl = $("<h1 class='card-title align-left'>").text(cityName);
 var tempElement = $("<p>").addClass("card-text").text("Temperature: " + temperature + "F")
-var humidityElement = $("<p>").addClass("card-text").text("Humidity: " + humidity + "")
-var windElement = $("<p>").addClass("card-text").text("Wind: " + wind + "mph")
+var humidityElement = $("<p>").addClass("card-text").text("Humidity: " + humidity + "%")
+var windElement = $("<p>").addClass("card-text").text("Wind: " + wind + " MPH")
 
 $("#currentWeather").append(cityNameEl, tempElement)
 $("#currentWeather").append(cityNameEl, humidityElement)
