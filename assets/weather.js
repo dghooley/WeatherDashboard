@@ -2,7 +2,17 @@ $(document).ready(function(){
 // APIkey 
 var APIkey = "401527215f995265731bc0cc2e824f7a"
 
+let date = new Date();
+
 // search button activation
+/*$("#userSearch").keypress(function(event){
+  if (event.keyCode === 13)  {
+    event.preventDefault();
+    $("#searchButton").click();
+  }
+});
+*/
+
 $("#searchButton").on("click", function(){
 var userSearch = $("#searchBar").val()
 // console.log(userSearch)
@@ -48,6 +58,16 @@ var coords = {
     lon: response.coord.lon
 }
 
+const currentUVEl= document.getElementById("UV-index");
+let =UVqURL="https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&cnt=1";
+axios.get(UVqURL)
+.then(function(response) {
+  let UVIndex=document.createElement("span");
+  UVIndex.setAttribute("class", "badge badge-danger");
+  currentUVEl.innerHTML="UV Index: ";
+  currentUVEl.append(UVIndex);
+})
+
 getFiveDay(coords)
 })
 }
@@ -62,5 +82,5 @@ function getFiveDay(coords){
     }).then(function(response){
 // console.log("FIVE DAY RESPONSE",response);
 }
-    )}
+    )}  
 })
