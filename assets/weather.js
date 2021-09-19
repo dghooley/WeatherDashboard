@@ -63,11 +63,4 @@ function getFiveDay(coords){
 // console.log("FIVE DAY RESPONSE",response);
 }
     )}
-
-
-
-
-
-
-
 })
