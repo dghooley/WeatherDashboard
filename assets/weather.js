@@ -19,21 +19,23 @@ getCurrentWeather(userSearch)
       method: "GET"
     }).then(function(response){
 //  console.log(response);
-    
+    $("#currentWeather").empty();
 // creating variables based on location in DOM
+    var mainDate = moment().format('L');
     var cityName = response.name;
-    console.log()
+//  console.log()
     var temperature = response.main.temp;
-    console.log()
+//  console.log()
     var humidity = response.main.humidity;
-    console.log()
+//  console.log()
     var wind = response.wind.speed;
-    console.log()
+//  console.log()
     var coords = {
       lat: response.coord.lat,
       lon: response.coord.lon}
     var uvi = response.uvi   
-    console.log("UVI") 
+//  console.log("UVI") 
+
 // creating dynamic HTML content to display city, temp, humidity, wind and UV index data
     var cityNameEl = $("<h2> class='card-title align-left'>").text(cityName);
     var tempElement = $("<p>").addClass("card-text").text("Temperature: " + temperature + "F")
@@ -41,7 +43,28 @@ getCurrentWeather(userSearch)
     var windElement = $("<p>").addClass("card-text").text("Wind: " + wind + " MPH")
     var coordsElement = $("<p>").addClass("card-text").text("Lat: " + coords.lat + ", Lon: " + coords.lon)
     var uvIndexElement = $("<p>").addClass("card-text").text("UV Index: " + uvi)
+    var currentWeather = response.weather[0].main;
 // console.log ("UV INDEX")
+    if (currentWeather === "Rain") {
+      var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/09d.png");
+      icon.attr("style", "height: 40px; width: 40px");
+    } else if (currentWeather === "Clouds") {
+      var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/03d.png");
+      icon.attr("style", "height: 40px; width: 40px");
+    } else if (currentWeather === "Clear") {
+  var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/01d.png");
+  icon.attr("style", "height: 40px; width: 40px");
+    } else if (currentWeather === "Drizzle") {
+  var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/10d.png");
+  icon.attr("style", "height: 40px; width: 40px");
+    } else if (currentWeather === "Snow") {
+      var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/13d.png");
+      icon.attr("style", "height: 40px; width: 40px");
+    }
+
+    var nDiv= $('<div>');
+    nDiv.append(mainDate, icon, tempElement, humidityElement, windElement);
+    $("#currentWeather").html(nDiv)
     $("#currentWeather").append(cityNameEl)
     $("#currentWeather").append(tempElement)
     $("#currentWeather").append(humidityElement)
@@ -61,6 +84,25 @@ getCurrentWeather(userSearch)
         method: "GET"
     }).then(function(response){
 // console.log("FIVE DAY RESPONSE",response);
-})
+    var results = response.list;
+    $("$#fiveDayForecast").empty();
+    for (var i = 0; i < results.length; i += 8) {
+      var fiveDayDiv = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
+      var date= results[i].dt_txt;
+      var setD= date.substr(0,10)
+      var temp= results[i].main.temp;
+      var humidity= results[i].main.humidity;
+      var h5date = $("<h5 class='card-title'>").text(setD);
+      var pTemp= $("<p class='card-text'>").text("Temp: " + temp);
+      var pHum= $("<p class='card-text'>").text("Humidity: " + humidity);
+      var weather = results[i].weather[0].main
+
+      fiveDayDiv.append(h5date);
+      fiveDayDiv.append(icon);
+      fiveDayDiv.append(pTemp);
+      fiveDayDiv.append(pHum);
+      $("#fiveDayForecast").append(fiveDayDiv);
+    }
+});
 }
 })
