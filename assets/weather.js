@@ -46,19 +46,20 @@ getCurrentWeather(userSearch)
     var currentWeather = response.weather[0].main;
 // console.log ("UV INDEX")
     if (currentWeather === "Rain") {
-      var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/09d.png");
+      var icon = $('<img>').attr("src", "http://openweathermap.org/img/wn/10d@2x.png");
       icon.attr("style", "height: 40px; width: 40px");
+      console.log(rain)
     } else if (currentWeather === "Clouds") {
-      var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/03d.png");
+      var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/03d@2x.png");
       icon.attr("style", "height: 40px; width: 40px");
     } else if (currentWeather === "Clear") {
-  var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/01d.png");
-  icon.attr("style", "height: 40px; width: 40px");
+    var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/01d@2x.png");
+    icon.attr("style", "height: 40px; width: 40px");
     } else if (currentWeather === "Drizzle") {
-  var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/10d.png");
-  icon.attr("style", "height: 40px; width: 40px");
+    var icon =$('<img>').attr("src",  "http://openweathermap.org/img/wn/09d@2x.png");
+    icon.attr("style", "height: 40px; width: 40px");
     } else if (currentWeather === "Snow") {
-      var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/13d.png");
+      var icon =$('<img>').attr("src", "http://openweathermap.org/img/wn/13d@2x.png");
       icon.attr("style", "height: 40px; width: 40px");
     }
 
